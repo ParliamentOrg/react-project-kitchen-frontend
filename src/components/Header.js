@@ -1,26 +1,29 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 const LoggedOutView = props => {
+  const { t } = useTranslation();
+
   if (!props.currentUser) {
     return (
       <ul className="nav navbar-nav pull-xs-right">
 
         <li className="nav-item">
           <Link to="/" className="nav-link">
-            Home
+            {t('Главная')}
           </Link>
         </li>
 
         <li className="nav-item">
           <Link to="/login" className="nav-link">
-            Sign in
+            {t('Войти')}
           </Link>
         </li>
 
         <li className="nav-item">
           <Link to="/register" className="nav-link">
-            Sign up
+            {t('Зарегистрироваться')}
           </Link>
         </li>
 
@@ -31,25 +34,29 @@ const LoggedOutView = props => {
 };
 
 const LoggedInView = props => {
+  const { t } = useTranslation();
+
   if (props.currentUser) {
     return (
       <ul className="nav navbar-nav pull-xs-right">
 
         <li className="nav-item">
           <Link to="/" className="nav-link">
-            Home
+            {t('Главная')}
           </Link>
         </li>
 
         <li className="nav-item">
           <Link to="/editor" className="nav-link">
-            <i className="ion-compose"></i>&nbsp;New Post
+            <i className="ion-compose" />&nbsp;
+            {t('Новая Запись')}
           </Link>
         </li>
 
         <li className="nav-item">
           <Link to="/settings" className="nav-link">
-            <i className="ion-gear-a"></i>&nbsp;Settings
+            <i className="ion-gear-a" />&nbsp;
+            {t('Настройки')}
           </Link>
         </li>
 
@@ -57,7 +64,7 @@ const LoggedInView = props => {
           <Link
             to={`/@${props.currentUser.username}`}
             className="nav-link">
-            <span>Hello, {props.currentUser.username}</span>
+            <span>{t('Привет')}, {props.currentUser.username}</span>
           </Link>
         </li>
 
