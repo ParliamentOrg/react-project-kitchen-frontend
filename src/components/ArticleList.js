@@ -1,18 +1,21 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 import ArticlePreview from './ArticlePreview';
 import ListPagination from './ListPagination';
-import React from 'react';
 
 const ArticleList = props => {
+  const { t } = useTranslation()
+
   if (!props.articles) {
     return (
-      <div className="article-preview">Loading...</div>
+      <div className="article-preview">{t('Загрузка...')}</div>
     );
   }
 
   if (props.articles.length === 0) {
     return (
       <div className="article-preview">
-        No articles are here... yet.
+        {t('Здесь нет статей ... пока.')}
       </div>
     );
   }
