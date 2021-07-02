@@ -19,7 +19,7 @@ const YourFeedTab = props => {
         <a  href=""
             className={ props.tab === 'feed' ? 'nav-link active' : 'nav-link' }
             onClick={clickHandler}>
-          {t('Ваши записи')}
+          {t('Ваши статьи')}
         </a>
       </li>
     );
