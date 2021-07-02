@@ -1,6 +1,7 @@
-import ArticleActions from './ArticleActions';
-import { Link } from 'react-router-dom';
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { format } from 'date-fns';
+import ArticleActions from './ArticleActions';
 
 const ArticleMeta = props => {
   const article = props.article;
@@ -15,7 +16,7 @@ const ArticleMeta = props => {
           {article.author.username}
         </Link>
         <span className="date">
-          {new Date(article.createdAt).toDateString()}
+          {format(new Date(article.createdAt), 'dd.MMM.yyyy HH:mm')}
         </span>
       </div>
 
