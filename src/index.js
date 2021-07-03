@@ -1,21 +1,22 @@
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import React from 'react';
-import { store, history} from './store';
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import React from "react";
+import { store, history } from "./store";
 
-import { Route, Switch } from 'react-router-dom';
-import { ConnectedRouter } from 'react-router-redux';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+// import { ConnectedRouter } from "react-router-redux";
 
-import './i18n';
-import App from './components/App';
+import "./i18n";
+import App from "./components/App";
 
-ReactDOM.render((
+ReactDOM.render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
+    <Router history={history}>
       <Switch>
         <Route path="/" component={App} />
       </Switch>
-    </ConnectedRouter>
-  </Provider>
+    </Router>
+  </Provider>,
 
-), document.getElementById('root'));
+  document.getElementById("root")
+);
