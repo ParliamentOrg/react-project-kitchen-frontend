@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+// import styles from './Header.module.css';
 
 const LoggedOutView = (props) => {
   const { t } = useTranslation();
@@ -8,7 +9,6 @@ const LoggedOutView = (props) => {
   if (!props.currentUser) {
     return (
       <ul className="nav navbar-nav pull-xs-right">
-
         <li className="nav-item">
           <Link to="/" className="nav-link">
             {t('Главная')}
@@ -26,7 +26,6 @@ const LoggedOutView = (props) => {
             {t('Зарегистрироваться')}
           </Link>
         </li>
-
       </ul>
     );
   }
@@ -39,7 +38,6 @@ const LoggedInView = (props) => {
   if (props.currentUser) {
     return (
       <ul className="nav navbar-nav pull-xs-right">
-
         <li className="nav-item">
           <Link to="/" className="nav-link">
             {t('Главная')}
@@ -49,7 +47,7 @@ const LoggedInView = (props) => {
         <li className="nav-item">
           <Link to="/editor" className="nav-link">
             <i className="ion-compose" />
-&nbsp;
+            &nbsp;
             {t('Новая Статья')}
           </Link>
         </li>
@@ -57,25 +55,20 @@ const LoggedInView = (props) => {
         <li className="nav-item">
           <Link to="/settings" className="nav-link">
             <i className="ion-gear-a" />
-&nbsp;
+            &nbsp;
             {t('Настройки')}
           </Link>
         </li>
 
         <li className="nav-item">
-          <Link
-            to={`/@${props.currentUser.username}`}
-            className="nav-link"
-          >
+          <Link to={`/@${props.currentUser.username}`} className="nav-link">
             <span>
               {t('Привет')}
               ,
-              {' '}
               {props.currentUser.username}
             </span>
           </Link>
         </li>
-
       </ul>
     );
   }
@@ -83,24 +76,18 @@ const LoggedInView = (props) => {
   return null;
 };
 
-// eslint-disable-next-line react/prefer-stateless-function
-class Header extends React.Component {
-  render() {
-    return (
-      <nav className="navbar navbar-light">
-        <div className="container">
-
-          <Link to="/" className="navbar-brand">
-            {this.props.appName.toLowerCase()}
-          </Link>
-
-          <LoggedOutView currentUser={this.props.currentUser} />
-
-          <LoggedInView currentUser={this.props.currentUser} />
-        </div>
-      </nav>
-    );
-  }
+function Header(props) {
+  return (
+    <nav className="navbar navbar-light">
+      <div className="container">
+        <Link to="/" className="navbar-brand">
+          {props.appName.toLowerCase()}
+        </Link>
+        <LoggedOutView currentUser={props.currentUser} />
+        <LoggedInView currentUser={props.currentUser} />
+      </div>
+    </nav>
+  );
 }
 
 export default Header;

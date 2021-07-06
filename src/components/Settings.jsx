@@ -1,7 +1,7 @@
 // eslint-disable-next-line max-classes-per-file
 import React from 'react';
 import { connect } from 'react-redux';
-import ListErrors from './ListErrors';
+import ListErrors from './ListErrors/ListErrors';
 import agent from '../agent';
 import {
   SETTINGS_SAVED,
@@ -162,7 +162,6 @@ class Settings extends React.Component {
                 currentUser={this.props.currentUser}
                 onSubmitForm={this.props.onSubmitForm}
               />
-
               <hr />
 
               <button

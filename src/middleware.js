@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import agent from './agent';
 import {
   ASYNC_START,

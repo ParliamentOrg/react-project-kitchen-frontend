@@ -3,19 +3,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { push } from 'react-router-redux';
-import agent from '../agent';
-import Header from './Header';
-import { APP_LOAD, REDIRECT } from '../constants/actionTypes';
-import Article from './Article';
-import Editor from './Editor';
-import Home from './Home';
-import Login from './Login';
-import { Profile } from './Profile';
-import ProfileFavorites from './ProfileFavorites';
-import Register from './Register';
-import Settings from './Settings';
-import { store } from '../store';
-import '../library.css';
+import agent from '../../agent';
+import Header from '../Header/Header';
+import { APP_LOAD, REDIRECT } from '../../constants/actionTypes';
+import Article from '../Article';
+import Editor from '../Editor';
+import Home from '../Home';
+import Login from '../Login';
+import { Profile } from '../Profile';
+import ProfileFavorites from '../ProfileFavorites';
+import Register from '../Register';
+import Settings from '../Settings';
+import { store } from '../../store';
+import '../../library.css';
 
 const mapStateToProps = (state) => ({
   appLoaded: state.common.appLoaded,
