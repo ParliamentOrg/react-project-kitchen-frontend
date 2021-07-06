@@ -13,10 +13,9 @@ i18n
     load: 'currentOnly',
     nsSeparator: false,
     react: {
-      useSuspense: false
-    }
+      useSuspense: false,
+    },
   });
-
 
 export default i18n;
 

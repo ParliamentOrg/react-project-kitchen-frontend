@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import ArticleActions from './ArticleActions';
 
-const ArticleMeta = props => {
-  const article = props.article;
+const ArticleMeta = (props) => {
+  const { article } = props;
   return (
     <div className="article-meta">
       <Link to={`/@${article.author.username}`}>

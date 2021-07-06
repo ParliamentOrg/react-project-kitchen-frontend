@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next';
 import ArticlePreview from './ArticlePreview';
 import ListPagination from './ListPagination';
 
-const ArticleList = props => {
-  const { t } = useTranslation()
+const ArticleList = (props) => {
+  const { t } = useTranslation();
 
   if (!props.articles) {
     return (
@@ -23,17 +23,16 @@ const ArticleList = props => {
   return (
     <div>
       {
-        props.articles.map(article => {
-          return (
-            <ArticlePreview article={article} key={article.slug} />
-          );
-        })
+        props.articles.map((article) => (
+          <ArticlePreview article={article} key={article.slug} />
+        ))
       }
 
       <ListPagination
         pager={props.pager}
         articlesCount={props.articlesCount}
-        currentPage={props.currentPage} />
+        currentPage={props.currentPage}
+      />
     </div>
   );
 };

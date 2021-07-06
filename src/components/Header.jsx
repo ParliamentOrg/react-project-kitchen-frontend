@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-const LoggedOutView = props => {
+const LoggedOutView = (props) => {
   const { t } = useTranslation();
 
   if (!props.currentUser) {
@@ -33,7 +33,7 @@ const LoggedOutView = props => {
   return null;
 };
 
-const LoggedInView = props => {
+const LoggedInView = (props) => {
   const { t } = useTranslation();
 
   if (props.currentUser) {
@@ -48,14 +48,16 @@ const LoggedInView = props => {
 
         <li className="nav-item">
           <Link to="/editor" className="nav-link">
-            <i className="ion-compose" />&nbsp;
+            <i className="ion-compose" />
+&nbsp;
             {t('Новая Статья')}
           </Link>
         </li>
 
         <li className="nav-item">
           <Link to="/settings" className="nav-link">
-            <i className="ion-gear-a" />&nbsp;
+            <i className="ion-gear-a" />
+&nbsp;
             {t('Настройки')}
           </Link>
         </li>
@@ -63,8 +65,14 @@ const LoggedInView = props => {
         <li className="nav-item">
           <Link
             to={`/@${props.currentUser.username}`}
-            className="nav-link">
-            <span>{t('Привет')}, {props.currentUser.username}</span>
+            className="nav-link"
+          >
+            <span>
+              {t('Привет')}
+              ,
+              {' '}
+              {props.currentUser.username}
+            </span>
           </Link>
         </li>
 
@@ -75,6 +83,7 @@ const LoggedInView = props => {
   return null;
 };
 
+// eslint-disable-next-line react/prefer-stateless-function
 class Header extends React.Component {
   render() {
     return (

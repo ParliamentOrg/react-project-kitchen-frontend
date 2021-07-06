@@ -4,31 +4,35 @@ import {
   ASYNC_END,
   LOGIN,
   LOGOUT,
-  REGISTER
+  REGISTER,
 } from './constants/actionTypes';
 
-const promiseMiddleware = store => next => action => {
+function isPromise(v) {
+  return v && typeof v.then === 'function';
+}
+
+const promiseMiddleware = (store) => (next) => (action) => {
   if (isPromise(action.payload)) {
     store.dispatch({ type: ASYNC_START, subtype: action.type });
 
     const currentView = store.getState().viewChangeCounter;
-    const skipTracking = action.skipTracking;
+    const { skipTracking } = action;
 
     action.payload.then(
-      res => {
-        const currentState = store.getState()
+      (res) => {
+        const currentState = store.getState();
         if (!skipTracking && currentState.viewChangeCounter !== currentView) {
-          return
+          return;
         }
         console.log('RESULT', res);
         action.payload = res;
         store.dispatch({ type: ASYNC_END, promise: action.payload });
         store.dispatch(action);
       },
-      error => {
-        const currentState = store.getState()
+      (error) => {
+        const currentState = store.getState();
         if (!skipTracking && currentState.viewChangeCounter !== currentView) {
-          return
+          return;
         }
         console.log('ERROR', error);
         action.error = true;
@@ -37,7 +41,7 @@ const promiseMiddleware = store => next => action => {
           store.dispatch({ type: ASYNC_END, promise: action.payload });
         }
         store.dispatch(action);
-      }
+      },
     );
 
     return;
@@ -46,7 +50,8 @@ const promiseMiddleware = store => next => action => {
   next(action);
 };
 
-const localStorageMiddleware = store => next => action => {
+// eslint-disable-next-line no-unused-vars
+const localStorageMiddleware = (store) => (next) => (action) => {
   if (action.type === REGISTER || action.type === LOGIN) {
     if (!action.error) {
       window.localStorage.setItem('jwt', action.payload.user.token);
@@ -60,9 +65,4 @@ const localStorageMiddleware = store => next => action => {
   next(action);
 };
 
-function isPromise(v) {
-  return v && typeof v.then === 'function';
-}
-
-
-export { promiseMiddleware, localStorageMiddleware }
+export { promiseMiddleware, localStorageMiddleware };
