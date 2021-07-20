@@ -1,5 +1,5 @@
 import { applyMiddleware, createStore } from 'redux';
-import { createLogger } from 'redux-logger';
+// import { createLogger } from 'redux-logger';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import { routerMiddleware } from 'react-router-redux';
 import { createBrowserHistory } from 'history';
@@ -24,7 +24,7 @@ const getMiddleware = () => {
     myRouterMiddleware,
     promiseMiddleware,
     localStorageMiddleware,
-    createLogger(),
+    // createLogger(),
   );
 };
 

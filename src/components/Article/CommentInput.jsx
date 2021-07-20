@@ -1,60 +1,52 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import agent from '../../agent';
 import { ADD_COMMENT } from '../../constants/actionTypes';
 
-const mapDispatchToProps = (dispatch) => ({
-  onSubmit: (payload) => dispatch({ type: ADD_COMMENT, payload }),
-});
+const CommentInput = (props) => {
+  const dispatch = useDispatch();
+  const [body, setBody] = useState('');
+  const { t } = useTranslation();
 
-class CommentInput extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      body: '',
-    };
+  const onChange = (ev) => {
+    setBody(ev.target.value);
+  };
 
-    this.setBody = (ev) => {
-      this.setState({ body: ev.target.value });
-    };
+  const createComment = (ev) => {
+    ev.preventDefault();
+    const payload = agent.Comments.create(props.slug,
+      { body });
+    setBody('');
+    dispatch({ type: ADD_COMMENT, payload });
+  };
 
-    this.createComment = (ev) => {
-      ev.preventDefault();
-      const payload = agent.Comments.create(this.props.slug,
-        { body: this.state.body });
-      this.setState({ body: '' });
-      this.props.onSubmit(payload);
-    };
-  }
+  return (
+    <form className="card comment-form" onSubmit={createComment}>
+      <div className="card-block">
+        <textarea
+          className="form-control"
+          placeholder={t('Написать комментарий...')}
+          value={body}
+          onChange={onChange}
+          rows="3"
+        />
+      </div>
+      <div className="card-footer">
+        <img
+          src={props.currentUser.image}
+          className="comment-author-img"
+          alt={props.currentUser.username}
+        />
+        <button
+          className="btn btn-sm btn-primary"
+          type="submit"
+        >
+          {t('Оставить комментарий')}
+        </button>
+      </div>
+    </form>
+  );
+};
 
-  render() {
-    return (
-      <form className="card comment-form" onSubmit={this.createComment}>
-        <div className="card-block">
-          <textarea
-            className="form-control"
-            placeholder="Write a comment..."
-            value={this.state.body}
-            onChange={this.setBody}
-            rows="3"
-          />
-        </div>
-        <div className="card-footer">
-          <img
-            src={this.props.currentUser.image}
-            className="comment-author-img"
-            alt={this.props.currentUser.username}
-          />
-          <button
-            className="btn btn-sm btn-primary"
-            type="submit"
-          >
-            Post Comment
-          </button>
-        </div>
-      </form>
-    );
-  }
-}
-
-export default connect(() => ({}), mapDispatchToProps)(CommentInput);
+export default CommentInput;

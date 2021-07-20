@@ -10,5 +10,8 @@
   "Привет": "Hello",
   "Редактировать статью": "Edit article",
   "Удалить статью": "Delete article",
-  "Написать комментарий...": "Write a comment..."
+  "Написать комментарий...": "Write a comment...",
+  "или": "or",
+  "чтобы добавить комментарии к этой статье.": "to add comments on this article.",
+  "Оставить комментарий": "Post Comment"
 }
